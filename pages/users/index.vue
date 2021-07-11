@@ -96,11 +96,10 @@ export default {
   methods: {
     register() {
       const self = this
-      if (this.$refs.form.validate()) {
-        return this.$store.dispatch('user/register', this.name).then(() => {
-          return self.$router.push({ path: `/users/${self.name}` })
-        })
-      }
+
+      return this.$store.dispatch('user/register', this.name).then(() => {
+        return self.$router.push({ path: `/users/${self.name}` })
+      })
     },
 
     showDialog(name) {

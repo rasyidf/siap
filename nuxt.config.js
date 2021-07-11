@@ -1,7 +1,19 @@
-export default {
+const pkg = require('./package')
+
+const env = {
+  NODE_ENV: process.env.NODE_ENV || 'development',
+  HOST: process.env.HOST || 'localhost',
+  PORT: process.env.PORT || 3000,
+  PORT_API: process.env.PORT_API || 3001
+}
+env.API_URL = process.env.API_URL || `http://localhost:${env.PORT_API}`
+
+const isDev = env.NODE_ENV === 'development'
+
+const config = {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'siap',
+    title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -50,8 +62,23 @@ export default {
     }
   },
 
+  serverMiddleware: [
+    '~/api/index.js'
+  ],
+  telemetry: false,
+  env,
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
   }
+  
+
 }
+
+if (isDev) {
+  config.axios.baseURL = `http://${env.HOST}:${env.PORT_API}`
+} else {
+  config.axios.baseURL = env.API_URL
+}
+config.env = env
+module.exports = config
