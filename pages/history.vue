@@ -5,7 +5,7 @@
         <div slot="empty" style="color: grey">Hah, kosong</div>
 
         <el-table-column
-          prop="date"
+          prop="createdAt"
           width="140px"
           label="Waktu"
           key="Waktu"
@@ -41,20 +41,18 @@
 
 <script>
 export default {
+  fetch() {
+    this.$axios.get('/api/attendance/all').then((response) => {
+      this.data = response.data
+    })
+  },
   data() {
     return {
-      data: [
-        { date: '2021/07/12 07:50', status: 'Tepat Waktu', desc: '-' },
-        { date: '2021/07/11 07:43', status: 'Tepat Waktu', desc: '-' },
-        { date: '2021/07/10 08:10', status: 'Terlambat', desc: '-' },
-        { date: '2021/07/09 07:50', status: 'Tepat Waktu', desc: '-' },
-        { date: '2021/07/08 07:50', status: 'Tepat Waktu', desc: '-' },
-        { date: '2021/07/07 08:10', status: 'Terlambat', desc: '-' },
-        { date: '2021/07/05 07:50', status: 'Tepat Waktu', desc: '-' },
-        { date: '2021/07/04 08:10', status: 'Terlambat', desc: '-' },
-        { date: '2021/07/03 07:50', status: 'Tepat Waktu', desc: '-' },
+      data: [],
+      titles: [
+        { prop: 'userName', label: 'Nama' },
+        { prop: 'description', label: 'Deskripsi' },
       ],
-      titles: [{ prop: 'desc', label: 'Deskripsi' }],
     }
   },
   methods: {

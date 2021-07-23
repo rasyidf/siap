@@ -18,7 +18,7 @@
             @click="onClick()"
           >
             Catat Presensi
-          </el-button>
+          </el-button> 
         </el-card>
       </el-col>
     </el-row>
@@ -47,8 +47,7 @@ export default Vue.extend({
         type: 'info',
         showClose: true,
         duration: 3000,
-      });
-      
+      })
     },
   },
 })

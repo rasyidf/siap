@@ -26,7 +26,7 @@
         <i class="el-icon-setting"></i>
         <span>Pengaturan</span>
       </el-menu-item>
-      <el-submenu>
+      <el-submenu index="/admin">
         <template slot="title">
           <i class="el-icon-setting"></i>
           Administrator</template

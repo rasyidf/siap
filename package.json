@@ -17,12 +17,14 @@
     "@nuxtjs/pwa": "^3.3.5",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.15.1",
+    "ejs": "^3.1.6",
     "element-ui": "^2.15.2",
     "express": "^4.17.1",
     "multer": "^1.4.2",
     "nuxt": "^2.15.7",
     "rimraf": "^3.0.2",
     "sharp": "^0.23.3",
+    "sqlite3": "^5.0.2",
     "vue-data-tables": "^3.4.5"
   },
   "devDependencies": {

@@ -29,6 +29,7 @@ app.use('/data', express.static(dataFolder))
 const apiRoutes = express.Router()
 apiRoutes.use('/user', require('./controller/user-controller'))
 apiRoutes.use('/face', require('./controller/face-controller'))
+apiRoutes.use('/attendance', require('./controller/attendance-controller'))
 app.use('/api', apiRoutes)
 
 module.exports = {
