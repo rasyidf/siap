@@ -1,17 +1,17 @@
-const pkg = require('./package')
+const pkg = require('./package');
 
 const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',
   HOST: process.env.HOST || 'localhost',
   PORT: process.env.PORT || 3000,
   PORT_API: process.env.PORT_API || 3001
-}
-env.API_URL = process.env.API_URL || `http://localhost:${env.PORT_API}`
+};
+env.API_URL = process.env.API_URL || `http://localhost:${env.PORT_API}`;
 
-const isDev = env.NODE_ENV === 'development'
+const isDev = env.NODE_ENV === 'development';
 
 const config = {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+
   head: {
     title: pkg.name,
     meta: [
@@ -25,37 +25,32 @@ const config = {
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
+
   css: [
     'element-ui/lib/theme-chalk/index.css'
   ],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+
   plugins: [
     '@/plugins/element-ui'
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
+
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
+
     '@nuxt/typescript-build',
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/auth'
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
-
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
       lang: 'en'
@@ -67,18 +62,29 @@ const config = {
   ],
   telemetry: false,
   env,
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+
   build: {
     transpile: [/^element-ui/],
-  }
-  
+  },
 
-}
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'profile', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    }
+  }
+
+};
 
 if (isDev) {
-  config.axios.baseURL = `http://${env.HOST}:${env.PORT_API}`
+  config.axios.baseURL = `http://${env.HOST}:${env.PORT_API}`;
 } else {
-  config.axios.baseURL = env.API_URL
+  config.axios.baseURL = env.API_URL;
 }
-config.env = env
-module.exports = config
+config.env = env;
+module.exports = config;

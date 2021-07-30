@@ -31,8 +31,8 @@ attendanceRouter.get("/all", (req, res) => {
 });
 // POST /create
 attendanceRouter.post("/create", (req, res) => {
-    const sql = "INSERT INTO attendance (Title, Author, Comments) VALUES (?, ?, ?)";
-    const att = [req.body.Title, req.body.Author, req.body.Comments];
+    const sql = "INSERT INTO attendance ('status','createdAt','description','userId','userName') VALUES (?,?,NULL,?,?)";
+    const att = [req.body.status, new Date().toDateString(), req.body.userId, req.body.userName];
     db.run(sql, att, err => {
         if (err) {
             consola.error({ message: err.message });
@@ -45,7 +45,7 @@ attendanceRouter.post("/create", (req, res) => {
 // GET /delete/5
 attendanceRouter.get("/delete/:id", (req, res) => {
     const id = req.params.id;
-    const sql = "SELECT * FROM Books WHERE Book_ID = ?";
+    const sql = "SELECT * FROM attendance WHERE id = ?";
     db.get(sql, id, (err, row) => {
         if (err) {
             consola.error({ message: err.message });

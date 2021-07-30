@@ -1,16 +1,26 @@
 <template>
-  <div class="container">
-    <el-row :gutter="10">
-      <el-col :span="18" :offset="0">
-        <el-card shadow="always" :body-style="{ padding: '20px' }">
-          <p>Selamat Datang</p>
-        </el-card>
-      </el-col>
-      <el-col :span="6" :offset="0">
-        <el-card shadow="always" :body-style="{ ...cardbody }">
+  <div class="container" style="height: 100%">
+    <el-row :gutter="10" style="height: 100%">
+      <el-col
+        :span="24"
+        :offset="0"
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+        "
+      >
+        <el-card
+          shadow="always"
+          :body-style="{ ...cardbody }"
+          style="min-width: 50%; height: 50%"
+        >
           <h5 :style="{ margin: 0, 'margin-bottom': '10px' }">
             Jangan Lupa lakukan Presensi
           </h5>
+          <clock />
           <el-button
             type="primary"
             size="default"
@@ -18,7 +28,7 @@
             @click="onClick()"
           >
             Catat Presensi
-          </el-button> 
+          </el-button>
         </el-card>
       </el-col>
     </el-row>
@@ -27,13 +37,15 @@
 
 <script>
 import Vue from 'vue'
+import Clock from '~/components/Clock.vue'
 
 export default Vue.extend({
+  components: { Clock },
   data() {
     return {
       cardbody: {
-        'padding-x': '20px',
-        height: '100px',
+        'padding-x': 'auto',
+        height: '90%',
         display: 'flex',
         'justify-content': 'space-between',
         'flex-direction': 'column',
@@ -42,12 +54,7 @@ export default Vue.extend({
   },
   methods: {
     onClick: function () {
-      this.$message({
-        message: 'Belum Diimplementasikan',
-        type: 'info',
-        showClose: true,
-        duration: 3000,
-      })
+       this.$router.push('/attend')
     },
   },
 })

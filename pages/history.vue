@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card shadow="always" :body-style="{ padding: '0' }">
+    <el-card shadow="always" :body-style="{ padding: '0', width: '100%' }">
       <el-table :data="data">
         <div slot="empty" style="color: grey">Hah, kosong</div>
 

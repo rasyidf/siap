@@ -26,7 +26,7 @@
         <i class="el-icon-setting"></i>
         <span>Pengaturan</span>
       </el-menu-item>
-      <el-submenu index="/admin">
+      <el-submenu v-if="admin" index="/admin">
         <template slot="title">
           <i class="el-icon-setting"></i>
           Administrator</template
@@ -54,6 +54,11 @@ export default {
     return {
       activeIndex: '1',
     }
+  },
+  computed: {
+    admin() {
+      return this.$store.state.isLoggedIn
+    },
   },
   methods: {
     handleSelect(index, keyPath) {
